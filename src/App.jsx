@@ -1,8 +1,8 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
 
 function App() {
+  const [isCompletedScreen, setIsCompletedScreen] = useState(false);
   return (
     <div className="app">
       <h1>My Todos</h1>
@@ -25,8 +25,20 @@ function App() {
         </div>
 
         <div className="btn-area">
-          <button>Todos</button>
-          <button>Completed</button>
+          <button
+            className={`secondaryBtn ${
+              isCompletedScreen === false && "active"
+            }`}
+            onClick={() => setIsCompletedScreen(false)}
+          >
+            Todos
+          </button>
+          <button
+            className={`secondaryBtn ${isCompletedScreen === true && "active"}`}
+            onClick={() => setIsCompletedScreen(true)}
+          >
+            Completed
+          </button>
         </div>
 
         <div className="todo-list">
