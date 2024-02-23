@@ -5,6 +5,20 @@ import "./App.css";
 
 function App() {
   const [isCompletedScreen, setIsCompletedScreen] = useState(false);
+  const [allTodos, setTodos] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+
+  const handleAddTodo = () => {
+    let newTodoItem = {
+      title: newTitle,
+      description: newDescription,
+    };
+    setTodos([newTodoItem, ...allTodos]);
+    setNewTitle("");
+    setNewDescription("");
+  };
+
   return (
     <div className="app">
       <h1>My Todos</h1>
@@ -13,14 +27,28 @@ function App() {
         <div className="todo-input">
           <div className="todo-input-item">
             <label htmlFor="">Title</label>
-            <input type="text" placeholder="Type the Task" />
+            <input
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              type="text"
+              placeholder="Type the Task"
+            />
           </div>
           <div className="todo-input-item">
             <label htmlFor="">Description</label>
-            <input type="text" placeholder="Type the Description" />
+            <input
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+              type="text"
+              placeholder="Type the Description"
+            />
           </div>
           <div className="todo-input-item">
-            <button type="button" className="primaryBtn">
+            <button
+              onClick={handleAddTodo}
+              type="button"
+              className="primaryBtn"
+            >
               Add
             </button>
           </div>
@@ -44,17 +72,21 @@ function App() {
         </div>
 
         <div className="todo-list">
-          <div className="todo-list-item">
-            <div>
-              <h3>Task 1</h3>
-              <p>Task 1 Description</p>
-            </div>
+          {allTodos.map((item, index) => {
+            return (
+              <div className="todo-list-item" key={index}>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
 
-            <div>
-              <AiOutlineDelete className="icon" />
-              <BsCheckLg className="check-icon" />
-            </div>
-          </div>
+                <div>
+                  <AiOutlineDelete className="icon" title="Delete?" />
+                  <BsCheckLg className="check-icon" title="completed?" />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
