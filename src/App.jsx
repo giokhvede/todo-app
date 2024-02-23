@@ -151,11 +151,6 @@ function App() {
                       title="Delete?"
                       onClick={() => handleDeleteTodo(index)}
                     />
-                    <BsCheckLg
-                      className="check-icon"
-                      onClick={() => handleCompletedTodos(index)}
-                      title="completed?"
-                    />
                   </div>
                 </div>
               );
