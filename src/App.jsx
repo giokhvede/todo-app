@@ -30,6 +30,13 @@ function App() {
     localStorage.setItem("savedTodoList", JSON.stringify(reducedTodo));
   };
 
+  const handleDeleteCompletedTodo = (index) => {
+    let reduceCompletedTodo = [...completedTodos];
+    reduceCompletedTodo.splice(index, 1);
+    setCompletedTodos(reduceCompletedTodo);
+    localStorage.setItem("completedTodos", JSON.stringify(reduceCompletedTodo));
+  };
+
   const handleCompletedTodos = (index) => {
     let now = new Date();
     let dd = now.getDate();
@@ -154,7 +161,7 @@ function App() {
                     <AiOutlineDelete
                       className="icon"
                       title="Delete?"
-                      onClick={() => handleDeleteTodo(index)}
+                      onClick={() => handleDeleteCompletedTodo(index)}
                     />
                   </div>
                 </div>
